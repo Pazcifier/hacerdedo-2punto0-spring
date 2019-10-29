@@ -1,0 +1,7 @@
+formato: {DRIVER, HOST, PORT, NAME, USER, PASSWORD}
+jdbc:postgresql://
+ec2-107-21-126-201.compute-1.amazonaws.com
+5432
+d2tes8ukbdj1u4
+byvblkdrkfblrj
+8dfa6f47a45a64c140a82d5aa2dcfb3705f08c1bc4a6b520d31cdb31cde992ee
