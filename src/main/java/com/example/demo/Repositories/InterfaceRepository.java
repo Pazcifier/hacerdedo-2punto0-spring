@@ -6,13 +6,13 @@
 package com.example.demo.Repositories;
 
 import com.example.demo.Entities.User;
+import java.sql.ResultSet;
 import java.util.List;
-import org.springframework.data.repository.query.Param;
 
 public interface InterfaceRepository<T> {
     T get(int id);
     List<T> getAll();
-    User insert(T t);
-    User update(T t);
-    boolean delete(int id);
+    T insert(T t);
+    T update(T t);
+    boolean delete(T t);
 }

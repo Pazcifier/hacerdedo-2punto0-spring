@@ -122,6 +122,52 @@ public class UserRepository implements InterfaceRepository<User> {
         return u;
     }
     
+    private String onlyLetters(String s) {
+        if (s.length() > 0) {
+            String aux = s;
+            char[] auxDiv = aux.toCharArray();
+            for (int i = 0; i < s.length(); i++) {
+                if (Character.isDigit(auxDiv[i])) {
+                    s = null;
+                    return s;
+                }
+            }
+            return s;
+        }
+        return null;
+    }
+    
+    private String onlyNumbers(String s) {
+        if (s.length() > 0) {
+            String aux = s;
+            char[] auxDiv = aux.toCharArray();
+            for (int i = 0; i < s.length(); i++) {
+                if (!Character.isDigit(auxDiv[i])) {
+                    s = null;
+                    return s;
+                }
+            }
+            return s;
+        }
+        return null;
+    }
+    
+    private User validateStrings(User u) {
+        String name = u.getName().replaceAll(" ","");
+        String last_name = u.getLast_name().replaceAll(" ", "");
+        String phone = u.getPhone().replaceAll(" ", "");
+        
+        name = onlyLetters(name);
+        last_name = onlyLetters(last_name);
+        phone = onlyNumbers(phone);
+        
+        u.setName(name);
+        u.setLast_name(last_name);
+        u.setPhone(phone);
+        
+        return u;
+    }
+    
     @Override
     public User get(int id) {
         Connection con = ConnectionFactory.getConnection();
@@ -196,6 +242,7 @@ public class UserRepository implements InterfaceRepository<User> {
     @Override
     public User update(User u) {
         Connection con = ConnectionFactory.getConnection();
+        validateStrings(u);
         String query = String.format("UPDATE users SET name = ?, last_name = ?, phone = ?, password = ? WHERE id = ?");
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -220,9 +267,9 @@ public class UserRepository implements InterfaceRepository<User> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(User u) {
         Connection con = ConnectionFactory.getConnection();
-        String query = String.format("DELETE FROM users WHERE id = %s", id);
+        String query = String.format("DELETE FROM users WHERE id = %s", u.getId());
         try {
             Statement delete = con.createStatement();
             int i = delete.executeUpdate(query);

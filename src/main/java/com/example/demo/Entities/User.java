@@ -18,23 +18,23 @@ import org.springframework.data.rest.core.annotation.RestResource;
  */
 
 @Entity
-@Table(name="Users")
+@Table(name="users")
 public class User {
     @Id
-    int id;
+    private int id;
     
     @Column(name="name")
-    String name;
+    private String name;
     @Column(name="last_name")
-    String last_name;
+    private String last_name;
     @Column(name="phone")
-    String phone;
+    private String phone;
     @Column(name="password")
-    String password;
+    private String password;
     @Column(name="type")
-    String type = "Passenger";
+    private String type = "Passenger";
     @Column(name="rating")
-    double rating = 0.0;
+    private double rating = 0.0;
     
     public User(int id, String name, String last_name, String phone, String password) {
         this.id = id;

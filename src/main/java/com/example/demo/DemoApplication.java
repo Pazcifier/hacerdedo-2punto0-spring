@@ -13,7 +13,6 @@ public class DemoApplication {
 	public static void main(String[] args) {
             Logger log = LoggerFactory.getLogger(DemoApplication.class);
             Connection con = ConnectionFactory.getConnection();
-            log.info("Estableciendo conexión con: " + ConnectionFactory.getDBHOST());
             
             try {
                 
